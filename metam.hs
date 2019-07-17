@@ -41,11 +41,13 @@ shortestBetween :: [String] -> (String, String) -> Int
 shortestBetween dict (start,end) = (minimum $ map length $ routes dict start end []) - 1
 
 connected :: String -> String -> Bool
-connected a b = (length a == length b) && (noChanges a b == 1)
+connected a b = (length a == length b) && (numChanges a b == 1)
     where
-        noChanges a b = noTrues $ zipWith (/=) a b
-        noTrues :: [Bool] -> Int
-        noTrues = length . filter id
+        numChanges :: String -> String -> Int
+        numChanges a b = numTrues $ zipWith (/=) a b
+        
+        numTrues :: [Bool] -> Int
+        numTrues = length . filter id
 
 routes :: [String] -> String -> String -> [String] -> [[String]]
 routes dict start end sofar
